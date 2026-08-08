@@ -1,4 +1,4 @@
-# smart_api_client
+# net_cache
 
 A single, reusable networking layer for Flutter apps, extracted from the
 patterns already in `alok_sell_manager` (`ApiService`, `ApiResponse`,
@@ -28,19 +28,21 @@ What it gives you, on top of plain Dio:
 
 ## Install
 
-Copy the `smart_api_client/` folder into your app (e.g. as a local path
+Copy the `net_cache/` folder into your app (e.g. as a local path
 package), then in the consuming app's `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  smart_api_client:
-    path: ../smart_api_client
+  net_cache:
+    git:
+      url: https://github.com/rishabhpatidar117/net_cache.git
+      ref: v1.0.0
 ```
 
 ## Setup (once, in `main()`)
 
 ```dart
-import 'package:smart_api_client/smart_api_client.dart';
+import 'package:net_cache/net_cache.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
