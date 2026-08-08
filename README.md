@@ -50,6 +50,7 @@ Future<void> main() async {
   SmartApiClient.init(ApiClientConfig(
     baseUrl: ApiConstant.baseUrl,
     tokenProvider: () => Storage.accessToken,
+    tokentypeProvider: () => "Bearer",
     onUnauthorized: () => AppRouter.context.read<AuthCubit>().logout(),
   ));
 
@@ -57,7 +58,7 @@ Future<void> main() async {
 }
 ```
 
-`tokenProvider` and `onUnauthorized` are callbacks instead of hard-coded
+`tokenProvider`,`tokentypeProvider` and `onUnauthorized` are callbacks instead of hard-coded
 `Storage`/`AuthCubit` references (like the current `dio_client.dart` has),
 so this package has zero dependency on your app's auth/router packages and
 can be dropped into any project.

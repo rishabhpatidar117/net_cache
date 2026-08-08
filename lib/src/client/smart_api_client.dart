@@ -25,6 +25,7 @@ import 'api_client_config.dart';
 /// SmartApiClient.init(ApiClientConfig(
 ///   baseUrl: 'https://api.myapp.com',
 ///   tokenProvider: () => Storage.accessToken,
+///   tokentypeProvider: () => "Bearer",
 ///   onUnauthorized: () => AppRouter.context.read<AuthCubit>().logout(),
 /// ));
 ///
@@ -103,10 +104,12 @@ class SmartApiClient {
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           final provider = config.tokenProvider;
+          final tokentypeProvider = config.tokentypeProvider;
           if (provider != null) {
             final token = await provider();
             if (token != null && token.isNotEmpty) {
-              options.headers['Authorization'] = 'Bearer $token';
+              options.headers['Authorization'] =
+                  '${tokentypeProvider != null ? "$tokentypeProvider " : ""}$token';
             }
           }
           handler.next(options);

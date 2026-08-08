@@ -24,6 +24,7 @@ class ApiClientConfig {
   /// string) so it always reads the latest token, same as the app's
   /// `Storage.accessToken` lookup in its auth interceptor.
   final FutureOr<String?> Function()? tokenProvider;
+  final FutureOr<String?> Function()? tokentypeProvider;
 
   /// Called when a request comes back 401. Use this to log the user out /
   /// redirect to login, same as the app's existing
@@ -61,6 +62,7 @@ class ApiClientConfig {
       'Accept': 'application/json',
     },
     this.tokenProvider,
+    this.tokentypeProvider,
     this.onUnauthorized,
     this.extraInterceptors = const [],
     this.enableHttpLogging = true,
