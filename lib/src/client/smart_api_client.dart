@@ -94,6 +94,7 @@ class SmartApiClient {
         connectTimeout: config.connectTimeout,
         receiveTimeout: config.receiveTimeout,
         sendTimeout: config.sendTimeout,
+
         headers: Map<String, dynamic>.from(config.defaultHeaders),
       ),
     );
@@ -103,6 +104,10 @@ class SmartApiClient {
     _authDio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
+          options.headers['content-type'] = "application/json";
+          options.headers['accept'] = "application/json";
+          options.headers['User-Agent'] =
+              'Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36';
           final provider = config.tokenProvider;
           final tokentypeProvider = config.tokentypeProvider;
           if (provider != null) {
