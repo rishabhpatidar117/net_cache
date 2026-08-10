@@ -107,9 +107,13 @@ class SmartApiClient {
           final tokentypeProvider = config.tokentypeProvider;
           if (provider != null) {
             final token = await provider();
+            String? tokenType;
+            if (tokentypeProvider != null) {
+              tokenType = await tokentypeProvider();
+            }
             if (token != null && token.isNotEmpty) {
               options.headers['Authorization'] =
-                  '${tokentypeProvider != null ? "$tokentypeProvider " : ""}$token';
+                  '${tokenType != null ? "$tokenType " : ""}$token';
             }
           }
           handler.next(options);
