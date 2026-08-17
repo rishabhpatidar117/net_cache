@@ -51,6 +51,7 @@ class ApiClientConfig {
   /// without — from the fields above.
   final Dio? authenticatedDio;
   final Dio? publicDio;
+  final HttpClientAdapter? httpClientAdapter;
 
   ApiClientConfig({
     required this.baseUrl,
@@ -69,5 +70,6 @@ class ApiClientConfig {
     ApiCacheStore? cacheStore,
     this.authenticatedDio,
     this.publicDio,
+    this.httpClientAdapter,
   }) : cacheStore = cacheStore ?? MemoryCacheStore();
 }

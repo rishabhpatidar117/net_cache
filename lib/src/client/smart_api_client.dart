@@ -88,7 +88,7 @@ class SmartApiClient {
   // ─────────────────────────────── setup ────────────────────────────────
 
   static Dio _buildDio(ApiClientConfig config) {
-    return Dio(
+    final dio = Dio(
       BaseOptions(
         baseUrl: config.baseUrl,
         connectTimeout: config.connectTimeout,
@@ -98,6 +98,13 @@ class SmartApiClient {
         headers: Map<String, dynamic>.from(config.defaultHeaders),
       ),
     );
+    if (config.httpClientAdapter != null) {
+      dio.httpClientAdapter = config.httpClientAdapter!;
+      // =
+      //  Http2Adapter(ConnectionManager(idleTimeout: 150000));
+    }
+
+    return dio;
   }
 
   void _attachInterceptors() {
