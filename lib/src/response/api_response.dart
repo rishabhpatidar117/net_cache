@@ -37,7 +37,9 @@ class ApiResponse {
               response.statusCode! >= 200 &&
               response.statusCode! < 300,
           data: data,
-          message: data?.toString() ?? 'Unknown error occurred.',
+          message: (data is Map && data["message"] != null)
+              ? (data["message"]?.toString() ?? 'Unknown error occurred.')
+              : getErrorMessage(data),
           completeData: response.data,
         );
       }
